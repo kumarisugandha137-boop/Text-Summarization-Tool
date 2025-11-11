@@ -1,0 +1,86 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyN0iEmJmz3HeeikfE//HyDX",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/kumarisugandha137-boop/Text-Summarization-Tool/blob/main/task%201\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "id": "TLejHl86kHRD"
+      },
+      "outputs": [],
+      "source": [
+        "import pandas as pd"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# ============================================\n",
+        "# 📝 Text Summarization Tool using NLP\n",
+        "# ============================================\n",
+        "\n",
+        "# Install required libraries\n",
+        "!pip install transformers sentencepiece torch --quiet\n",
+        "\n",
+        "# Import libraries\n",
+        "from transformers import pipeline\n",
+        "\n",
+        "# Initialize summarization pipeline\n",
+        "summarizer = pipeline(\"summarization\", model=\"facebook/bart-large-cnn\")\n",
+        "\n",
+        "# Example input text (you can replace this with any article)\n",
+        "input_text = \"\"\"\n",
+        "Artificial intelligence (AI) is a rapidly evolving field of computer science\n",
+        "concerned with building machines capable of performing tasks that typically\n",
+        "require human intelligence. These tasks include problem-solving, learning,\n",
+        "perception, understanding natural language, and more. In recent years, the\n",
+        "advent of deep learning and neural networks has propelled AI into everyday\n",
+        "applications — from self-driving cars to virtual assistants and medical diagnosis.\n",
+        "While AI promises immense benefits, it also raises concerns around ethics,\n",
+        "privacy, and employment. Policymakers and technologists alike are working to\n",
+        "ensure AI’s growth remains aligned with human values.\n",
+        "\"\"\"\n",
+        "\n",
+        "# Display original text length\n",
+        "print(\"🔹 Original text length:\", len(input_text.split()), \"words\\n\")\n",
+        "\n",
+        "# Generate summary\n",
+        "summary = summarizer(input_text, max_length=100, min_length=30, do_sample=False)[0]['summary_text']\n",
+        "\n",
+        "# Display the summary\n",
+        "print(\"🔸 Summary:\\n\")\n",
+        "print(summary)\n"
+      ],
+      "metadata": {
+        "id": "EJWEEi53lwBN"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
